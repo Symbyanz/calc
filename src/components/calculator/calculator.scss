@@ -1,0 +1,26 @@
+
+// #3F51B5
+// #3D4F81
+.calculator {
+    color: #fff;
+    // .calculator__container
+    &__container {
+        padding: 0 20px;
+        width: 420px;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    &__field{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    &__result{
+        font-weight: 500;
+
+    }
+}
