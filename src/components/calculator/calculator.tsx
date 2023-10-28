@@ -8,20 +8,18 @@ const Calculator = () => {
     const [rateValue, setRateValue] = useState(10); // процентная ставка
     const [resultValue, setResultValue] = useState('5235.65'); // результат итоговый - 5
     // начисление процента происходит раз в месяц (в данном примере)
+    // ы первый и последний месяц пополнений нет
 
     useEffect(() => {
-        const arr: number[] = [depositeValue]; // for graphs
-        // 	Месяц 12	54 779,16 ₽
-        //  Месяц 13	55 235,65 ₽
-        // 	Месяц 14	55 695,95 ₽
-        // ...
-        //  Месяц 24	60 515,25 ₽
-        //  Месяц 25    61 019,55 ₽
+        const arr: number[] = [depositeValue]; // для возможных графиков
+
         const rateActual = (100 + (rateValue / 12)) / 100;
         for (let i = 1; i <= periodsValue; i++) {
-            arr[i] = (Math.floor((arr[i - 1] + replenishmentValue) * rateActual * 100) / 100);
+            arr[i] = (Math.floor((arr[i - 1] * rateActual) * 100) / 100) + replenishmentValue;
         }
+        arr[periodsValue] = arr[periodsValue] - replenishmentValue;
         setResultValue(arr[periodsValue].toFixed(2));
+
     }, [depositeValue, periodsValue, replenishmentValue, rateValue])
 
     return (
